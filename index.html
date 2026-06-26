@@ -1,0 +1,751 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>LyricMind AI — Understand Who You Are Becoming</title>
+  <meta name="description" content="LyricMind AI is an AI-powered emotional intelligence platform combining daily journaling, voice notes, Spotify listening patterns, and personality analysis to help you grow." />
+  <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><rect width='100' height='100' rx='20' fill='%23F18F1A'/><text y='.9em' x='15' font-size='70'>🧠</text></svg>" />
+  <link rel="stylesheet" href="/css/style.css" />
+</head>
+<body>
+
+  <!-- ═══════════════════════════════════════════════════
+       LOGIN / ONBOARDING PAGE
+       ═══════════════════════════════════════════════════ -->
+  <div id="login-page" class="login-page page">
+    <div class="login-card">
+      <div class="login-card__logo">
+        <div class="login-card__logo-icon">🧠</div>
+        <span class="login-card__logo-text">LyricMind AI</span>
+      </div>
+      <p class="login-card__subtitle">
+        An AI companion that understands<br/>who you are becoming.
+      </p>
+
+      <form id="login-form" class="login-form" autocomplete="off">
+        <div class="form-group">
+          <label for="input-name">Full Name</label>
+          <input type="text" id="input-name" class="form-input" placeholder="Enter your name" required />
+        </div>
+
+        <div class="form-row">
+          <div class="form-group">
+            <label for="input-gender">Gender</label>
+            <select id="input-gender" class="form-input" required>
+              <option value="" disabled selected>Select</option>
+              <option value="male">Male</option>
+              <option value="female">Female</option>
+              <option value="non-binary">Non-binary</option>
+              <option value="prefer-not">Prefer not to say</option>
+            </select>
+          </div>
+          <div class="form-group">
+            <label for="input-age">Age</label>
+            <input type="number" id="input-age" class="form-input" placeholder="e.g. 22" min="13" max="120" required />
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label for="input-education">Education</label>
+          <select id="input-education" class="form-input" required>
+            <option value="" disabled selected>Select</option>
+            <option value="high-school">High School</option>
+            <option value="bachelors">Bachelor's Degree</option>
+            <option value="masters">Master's Degree</option>
+            <option value="phd">PhD / Doctorate</option>
+            <option value="self-taught">Self-taught</option>
+            <option value="other">Other</option>
+          </select>
+        </div>
+
+        <button type="submit" id="login-btn" class="login-btn">
+          <svg viewBox="0 0 24 24" fill="currentColor"><path d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92a5.06 5.06 0 0 1-2.2 3.32v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.1z" fill="#4285F4"/><path d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z" fill="#34A853"/><path d="M5.84 14.09c-.22-.66-.35-1.36-.35-2.09s.13-1.43.35-2.09V7.07H2.18C1.43 8.55 1 10.22 1 12s.43 3.45 1.18 4.93l2.85-2.22.81-.62z" fill="#FBBC05"/><path d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.07l3.66 2.84c.87-2.6 3.3-4.53 6.16-4.53z" fill="#EA4335"/></svg>
+          <span class="login-btn__text">Continue</span>
+          <div class="login-btn__loader"></div>
+        </button>
+      </form>
+
+      <p class="login-terms">
+        By continuing, you agree to our <a href="#">Terms of Service</a><br/>and <a href="#">Privacy Policy</a>.
+      </p>
+    </div>
+
+    <!-- ── STEP 2: Spotify Onboarding Card ── -->
+    <div id="spotify-onboarding-card" class="spotify-onboarding-card" style="display:none;">
+      <button id="onboarding-back-btn" class="onboarding-back-btn" title="Back">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M19 12H5"/><path d="M12 19l-7-7 7-7"/></svg>
+        Back
+      </button>
+
+      <div class="onboarding-spotify-logo">
+        <svg width="52" height="52" viewBox="0 0 24 24" fill="#1DB954"><path d="M12 0C5.4 0 0 5.4 0 12s5.4 12 12 12 12-5.4 12-12S18.66 0 12 0zm5.521 17.34c-.24.359-.66.48-1.021.24-2.82-1.74-6.36-2.101-10.561-1.141-.418.122-.779-.179-.899-.539-.12-.421.18-.78.54-.9 4.56-1.021 8.52-.6 11.64 1.32.42.18.479.659.301 1.02zm1.44-3.3c-.301.42-.841.6-1.262.3-3.239-1.98-8.159-2.58-11.939-1.38-.479.12-1.02-.12-1.14-.6-.12-.48.12-1.021.6-1.141C9.6 9.9 15 10.561 18.72 12.84c.361.181.54.78.241 1.2zm.12-3.36C15.24 8.4 8.82 8.16 5.16 9.301c-.6.179-1.2-.181-1.38-.721-.18-.601.18-1.2.72-1.381 4.26-1.26 11.28-1.02 15.721 1.621.539.3.719 1.02.419 1.56-.299.421-1.02.599-1.559.3z"/></svg>
+      </div>
+
+      <h2 class="onboarding-title">Connect Spotify</h2>
+      <p class="onboarding-subtitle">Optional but <strong>highly recommended</strong></p>
+
+      <div class="onboarding-benefits">
+        <div class="onboarding-benefit">
+          <span class="onboarding-benefit__icon">🧠</span>
+          <div>
+            <div class="onboarding-benefit__title">Smarter AI Insights</div>
+            <div class="onboarding-benefit__desc">Your music patterns inform daily reflections and personality analysis</div>
+          </div>
+        </div>
+        <div class="onboarding-benefit">
+          <span class="onboarding-benefit__icon">🎭</span>
+          <div>
+            <div class="onboarding-benefit__title">Mood Pattern Detection</div>
+            <div class="onboarding-benefit__desc">Understand how your emotions connect to what you listen to</div>
+          </div>
+        </div>
+        <div class="onboarding-benefit">
+          <span class="onboarding-benefit__icon">💬</span>
+          <div>
+            <div class="onboarding-benefit__title">Richer Self-Reflection</div>
+            <div class="onboarding-benefit__desc">Chatbot draws from your journals AND your listening history</div>
+          </div>
+        </div>
+        <div class="onboarding-benefit">
+          <span class="onboarding-benefit__icon">📈</span>
+          <div>
+            <div class="onboarding-benefit__title">Growth Tracking</div>
+            <div class="onboarding-benefit__desc">Music-based signals contribute to your weekly growth score</div>
+          </div>
+        </div>
+      </div>
+
+      <button id="onboarding-connect-btn" class="onboarding-connect-btn">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="white"><path d="M12 0C5.4 0 0 5.4 0 12s5.4 12 12 12 12-5.4 12-12S18.66 0 12 0zm5.521 17.34c-.24.359-.66.48-1.021.24-2.82-1.74-6.36-2.101-10.561-1.141-.418.122-.779-.179-.899-.539-.12-.421.18-.78.54-.9 4.56-1.021 8.52-.6 11.64 1.32.42.18.479.659.301 1.02zm1.44-3.3c-.301.42-.841.6-1.262.3-3.239-1.98-8.159-2.58-11.939-1.38-.479.12-1.02-.12-1.14-.6-.12-.48.12-1.021.6-1.141C9.6 9.9 15 10.561 18.72 12.84c.361.181.54.78.241 1.2zm.12-3.36C15.24 8.4 8.82 8.16 5.16 9.301c-.6.179-1.2-.181-1.38-.721-.18-.601.18-1.2.72-1.381 4.26-1.26 11.28-1.02 15.721 1.621.539.3.719 1.02.419 1.56-.299.421-1.02.599-1.559.3z"/></svg>
+        Connect Spotify
+        <div class="login-btn__loader"></div>
+      </button>
+      <button id="onboarding-skip-btn" class="onboarding-skip-btn">
+        Skip for Now
+        <div class="login-btn__loader"></div>
+      </button>
+      <p class="onboarding-note">You can connect Spotify later from Settings at any time.</p>
+    </div>
+  </div>
+
+  <!-- ═══════════════════════════════════════════════════
+       APP SHELL (hidden until login)
+       ═══════════════════════════════════════════════════ -->
+  <div id="app-shell" class="hidden">
+
+    <!-- ── NAVBAR ── -->
+    <nav class="navbar" role="navigation">
+      <div class="navbar__logo">
+        <div class="navbar__logo-icon">🧠</div>
+        <span class="navbar__logo-text">LyricMind AI</span>
+      </div>
+
+      <div class="navbar__tabs">
+        <button class="navbar__tab active" data-page="page-journal">Journal</button>
+        <button class="navbar__tab" data-page="page-analysis">AI Analysis</button>
+      </div>
+
+      <div class="navbar__right">
+        <div id="navbar-avatar" class="navbar__avatar" title="Profile">?</div>
+
+        <!-- Profile Dropdown -->
+        <div id="profile-dropdown" class="profile-dropdown">
+          <div class="profile-dropdown__header">
+            <div id="dropdown-name" class="profile-dropdown__name">User</div>
+            <div id="dropdown-email" class="profile-dropdown__email">user@gmail.com</div>
+          </div>
+          <div class="profile-dropdown__items">
+            <button id="menu-profile" class="profile-dropdown__item">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
+              Profile
+            </button>
+            <div class="profile-dropdown__divider"></div>
+            <button id="menu-journal-history" class="profile-dropdown__item">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/></svg>
+              Journal History
+            </button>
+            <button id="menu-song-history" class="profile-dropdown__item">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="5.5" cy="17.5" r="2.5"/><circle cx="17.5" cy="15.5" r="2.5"/><path d="M8 17V5l12-2v12"/></svg>
+              Song History
+            </button>
+            <button id="menu-analysis-history" class="profile-dropdown__item">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15V5a2 2 0 0 0-2-2H5a2 2 0 0 0-2 2v10"/><polyline points="3 17 9 11 13 15 21 7"/></svg>
+              Analysis History
+            </button>
+            <div class="profile-dropdown__divider"></div>
+            <button id="menu-personal-diary" class="profile-dropdown__item">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"/><path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"/><path d="M12 7v6"/><path d="M9 10h6"/></svg>
+              ✦ Memory Vault
+            </button>
+            <button id="menu-settings" class="profile-dropdown__item">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1-2.83 2.83l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-4 0v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83-2.83l.06-.06A1.65 1.65 0 0 0 4.68 15a1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1 0-4h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 2.83-2.83l.06.06A1.65 1.65 0 0 0 9 4.68a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 4 0v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 2.83l-.06.06A1.65 1.65 0 0 0 19.4 9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 0 4h-.09a1.65 1.65 0 0 0-1.51 1z"/></svg>
+              Settings
+            </button>
+            <div class="profile-dropdown__divider"></div>
+            <button id="menu-logout" class="profile-dropdown__item profile-dropdown__item--danger">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4"/><polyline points="16 17 21 12 16 7"/><line x1="21" y1="12" x2="9" y2="12"/></svg>
+              Logout
+            </button>
+          </div>
+        </div>
+      </div>
+    </nav>
+
+    <!-- ── MAIN CONTENT ── -->
+    <main class="main-content">
+
+      <!-- ════════════════════════════════════════════════
+           JOURNAL PAGE
+           ════════════════════════════════════════════════ -->
+      <div id="page-journal" class="page active">
+        <div class="page-container">
+
+          <div class="journal-header">
+            <h1 id="journal-greeting" class="journal-header__greeting">Good morning</h1>
+            <p id="journal-date" class="journal-header__date"></p>
+          </div>
+
+          <!-- Spotify Connection -->
+          <div class="spotify-section">
+            <div class="spotify-section__header">
+              <div class="spotify-section__title">
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M12 0C5.4 0 0 5.4 0 12s5.4 12 12 12 12-5.4 12-12S18.66 0 12 0zm5.521 17.34c-.24.359-.66.48-1.021.24-2.82-1.74-6.36-2.101-10.561-1.141-.418.122-.779-.179-.899-.539-.12-.421.18-.78.54-.9 4.56-1.021 8.52-.6 11.64 1.32.42.18.479.659.301 1.02zm1.44-3.3c-.301.42-.841.6-1.262.3-3.239-1.98-8.159-2.58-11.939-1.38-.479.12-1.02-.12-1.14-.6-.12-.48.12-1.021.6-1.141C9.6 9.9 15 10.561 18.72 12.84c.361.181.54.78.241 1.2zm.12-3.36C15.24 8.4 8.82 8.16 5.16 9.301c-.6.179-1.2-.181-1.38-.721-.18-.601.18-1.2.72-1.381 4.26-1.26 11.28-1.02 15.721 1.621.539.3.719 1.02.419 1.56-.299.421-1.02.599-1.559.3z"/></svg>
+                Spotify
+              </div>
+              <label class="toggle-switch">
+                <input type="checkbox" id="spotify-toggle" />
+                <span class="toggle-switch__slider"></span>
+              </label>
+            </div>
+            <div id="spotify-status" class="spotify-status">
+              <span class="spotify-status__dot"></span>
+              Not connected
+            </div>
+            <div id="spotify-recent" class="spotify-recent">
+              <div class="spotify-recent__title">Recently Played</div>
+              <div id="spotify-recent-list"></div>
+            </div>
+          </div>
+
+          <!-- Journal Prompt -->
+          <div class="journal-prompt">
+            <h2 class="journal-prompt__heading">What's on your mind today?</h2>
+            <p class="journal-prompt__subtitle">Capture your thoughts, emotions, ideas, and reflections.</p>
+          </div>
+
+          <!-- Journal Editor -->
+          <div class="journal-editor">
+            <textarea id="journal-textarea" class="journal-textarea" placeholder="How are you feeling today?"></textarea>
+            <div class="journal-editor__footer">
+              <span id="journal-charcount" class="journal-editor__charcount">0 characters</span>
+              <button id="journal-save-btn" class="journal-editor__save" disabled>Save Entry</button>
+            </div>
+          </div>
+
+          <!-- Voice Recording -->
+          <div class="voice-section">
+            <div class="voice-section__header">
+              <div class="voice-section__title">
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2a3 3 0 0 0-3 3v7a3 3 0 0 0 6 0V5a3 3 0 0 0-3-3Z"/><path d="M19 10v2a7 7 0 0 1-14 0v-2"/><line x1="12" y1="19" x2="12" y2="22"/></svg>
+                Voice Journal
+              </div>
+              <span id="voice-status" class="voice-section__status">Ready</span>
+            </div>
+            <div class="voice-controls">
+              <button id="voice-record-btn" class="voice-record-btn" title="Record voice note">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2a3 3 0 0 0-3 3v7a3 3 0 0 0 6 0V5a3 3 0 0 0-3-3Z"/><path d="M19 10v2a7 7 0 0 1-14 0v-2"/><line x1="12" y1="19" x2="12" y2="22"/></svg>
+              </button>
+              <div id="voice-visualizer" class="voice-visualizer">
+                <div class="voice-visualizer__bar"></div><div class="voice-visualizer__bar"></div><div class="voice-visualizer__bar"></div><div class="voice-visualizer__bar"></div><div class="voice-visualizer__bar"></div><div class="voice-visualizer__bar"></div><div class="voice-visualizer__bar"></div><div class="voice-visualizer__bar"></div><div class="voice-visualizer__bar"></div><div class="voice-visualizer__bar"></div><div class="voice-visualizer__bar"></div><div class="voice-visualizer__bar"></div><div class="voice-visualizer__bar"></div><div class="voice-visualizer__bar"></div><div class="voice-visualizer__bar"></div><div class="voice-visualizer__bar"></div><div class="voice-visualizer__bar"></div><div class="voice-visualizer__bar"></div><div class="voice-visualizer__bar"></div><div class="voice-visualizer__bar"></div><div class="voice-visualizer__bar"></div><div class="voice-visualizer__bar"></div><div class="voice-visualizer__bar"></div><div class="voice-visualizer__bar"></div><div class="voice-visualizer__bar"></div><div class="voice-visualizer__bar"></div><div class="voice-visualizer__bar"></div><div class="voice-visualizer__bar"></div><div class="voice-visualizer__bar"></div><div class="voice-visualizer__bar"></div><div class="voice-visualizer__bar"></div><div class="voice-visualizer__bar"></div><div class="voice-visualizer__bar"></div><div class="voice-visualizer__bar"></div><div class="voice-visualizer__bar"></div><div class="voice-visualizer__bar"></div><div class="voice-visualizer__bar"></div><div class="voice-visualizer__bar"></div><div class="voice-visualizer__bar"></div><div class="voice-visualizer__bar"></div>
+              </div>
+              <span id="voice-timer" class="voice-timer">0:00</span>
+            </div>
+            <div id="voice-transcription" class="voice-transcription">
+              <div class="voice-transcription__label">Live Transcription</div>
+              <div id="voice-transcription-text" class="voice-transcription__text"></div>
+            </div>
+          </div>
+
+        </div>
+      </div>
+
+      <!-- ════════════════════════════════════════════════
+           AI ANALYSIS PAGE — Premium Intelligence Dashboard
+           ════════════════════════════════════════════════ -->
+      <div id="page-analysis" class="page">
+        <div class="page-container analysis-page-wide">
+
+          <div class="analysis-header">
+            <h1 class="analysis-header__title">Your AI Analysis</h1>
+            <p class="analysis-header__subtitle">Personalized insights from your journals, voice notes, and listening patterns.</p>
+          </div>
+
+          <!-- SECTION 1: Daily AI Reflection (Hero Card) -->
+          <div class="ai-reflection-card">
+            <div class="ai-reflection__sparkle">✦</div>
+            <div class="ai-reflection__content">
+              <h2 class="ai-reflection__label">Daily AI Reflection</h2>
+              <p id="ai-reflection-text" class="ai-reflection__text">Loading your reflection...</p>
+              <div class="ai-reflection__meta">
+                <span id="ai-reflection-date"></span>
+                <span id="ai-reflection-count"></span>
+              </div>
+            </div>
+          </div>
+
+          <!-- SECTION 2: Current State + Daily Analysis (Side by side) -->
+          <div class="analysis-dual-row">
+            <!-- LEFT: Emotional State -->
+            <div class="state-card">
+              <h2 class="section-title">Current State</h2>
+              <div id="current-state-label" class="state-card__state">Focused</div>
+              <div class="state-rings" id="state-rings">
+                <!-- SVG rings rendered by JS -->
+              </div>
+            </div>
+
+            <!-- RIGHT: Daily Analysis -->
+            <div class="daily-card">
+              <h2 class="section-title">Today's Breakdown</h2>
+              <div class="daily-items">
+                <div class="daily-item daily-item--strength">
+                  <div class="daily-item__label">Today's Strength</div>
+                  <div id="daily-strength" class="daily-item__value">—</div>
+                  <p id="daily-strength-desc" class="daily-item__desc"></p>
+                </div>
+                <div class="daily-item daily-item--challenge">
+                  <div class="daily-item__label">Today's Challenge</div>
+                  <div id="daily-challenge" class="daily-item__value">—</div>
+                  <p id="daily-challenge-desc" class="daily-item__desc"></p>
+                </div>
+                <div class="daily-item daily-item--insight">
+                  <div class="daily-item__label">Today's Insight</div>
+                  <p id="daily-insight" class="daily-item__text">—</p>
+                </div>
+                <div class="daily-item daily-item--action">
+                  <div class="daily-item__label">Suggested Action</div>
+                  <p id="daily-action" class="daily-item__text">—</p>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- SECTION 3: Weekly Analysis -->
+          <div class="weekly-card">
+            <div class="weekly-card__header">
+              <div>
+                <h2 class="section-title">Weekly Analysis</h2>
+                <p class="section-subtitle">Your personal growth report</p>
+              </div>
+              <div class="weekly-growth-ring" id="weekly-growth-ring">
+                <!-- SVG growth ring rendered by JS -->
+              </div>
+            </div>
+
+            <div class="weekly-stats" id="weekly-stats">
+              <div class="weekly-stat">
+                <div class="weekly-stat__icon">📈</div>
+                <div class="weekly-stat__value" id="weekly-mood-trend">—</div>
+                <div class="weekly-stat__label">Mood Trend</div>
+              </div>
+              <div class="weekly-stat">
+                <div class="weekly-stat__icon">🎯</div>
+                <div class="weekly-stat__value" id="weekly-common-state">—</div>
+                <div class="weekly-stat__label">Most Common State</div>
+              </div>
+              <div class="weekly-stat">
+                <div class="weekly-stat__icon">🏆</div>
+                <div class="weekly-stat__value" id="weekly-biggest-win">—</div>
+                <div class="weekly-stat__label">Biggest Win</div>
+              </div>
+              <div class="weekly-stat">
+                <div class="weekly-stat__icon">🌱</div>
+                <div class="weekly-stat__value" id="weekly-growth-areas">—</div>
+                <div class="weekly-stat__label">Growth Areas</div>
+              </div>
+            </div>
+
+            <div class="weekly-summary">
+              <h3 class="weekly-summary__heading">AI Weekly Summary</h3>
+              <p id="weekly-summary-text" class="weekly-summary__text">—</p>
+            </div>
+
+            <div class="weekly-recommendations">
+              <h3 class="weekly-recommendations__heading">This Week's Recommendations</h3>
+              <div id="weekly-recommendations-list" class="recommendation-list"></div>
+            </div>
+          </div>
+
+          <!-- SECTION 4: Personality Profile -->
+          <div class="personality-card">
+            <h2 class="section-title">Personality Profile</h2>
+            <p class="section-subtitle">AI-generated personality map from your journals and listening patterns</p>
+
+            <div class="personality-grid">
+              <div class="personality-block">
+                <h3 class="personality-block__title">🧠 Personality Strengths</h3>
+                <div id="personality-strengths" class="personality-tags"></div>
+              </div>
+              <div class="personality-block">
+                <h3 class="personality-block__title">🔄 Behavioral Patterns</h3>
+                <div id="personality-patterns" class="personality-tags"></div>
+              </div>
+              <div class="personality-block">
+                <h3 class="personality-block__title">💡 Thinking Style</h3>
+                <p id="personality-thinking" class="personality-block__text">—</p>
+              </div>
+              <div class="personality-block">
+                <h3 class="personality-block__title">⚖️ Decision Making</h3>
+                <p id="personality-decisions" class="personality-block__text">—</p>
+              </div>
+              <div class="personality-block">
+                <h3 class="personality-block__title">❤️ Emotional Tendencies</h3>
+                <p id="personality-emotions" class="personality-block__text">—</p>
+              </div>
+              <div class="personality-block">
+                <h3 class="personality-block__title">📚 Learning Style</h3>
+                <p id="personality-learning" class="personality-block__text">—</p>
+              </div>
+            </div>
+          </div>
+
+          <!-- SECTION 5: Growth Trajectory -->
+          <div class="trajectory-section">
+            <h2 class="section-title">Growth Trajectory</h2>
+            <p class="section-subtitle">Who you are becoming</p>
+
+            <div class="trajectory-identity">
+              <div class="trajectory-endpoint trajectory-endpoint--current">
+                <div class="trajectory-endpoint__label">Current Self</div>
+                <div id="trajectory-current" class="trajectory-endpoint__text">—</div>
+              </div>
+
+              <div class="trajectory-progress-bar">
+                <div id="trajectory-progress-fill" class="trajectory-progress-bar__fill" style="width: 0%"></div>
+                <div id="trajectory-progress-label" class="trajectory-progress-bar__label">0%</div>
+              </div>
+
+              <div class="trajectory-endpoint trajectory-endpoint--desired">
+                <div class="trajectory-endpoint__label">Desired Self</div>
+                <div id="trajectory-desired" class="trajectory-endpoint__text">—</div>
+              </div>
+            </div>
+
+            <div class="trajectory-areas" id="trajectory-areas">
+              <!-- Rendered by JS -->
+            </div>
+          </div>
+
+          <!-- SECTION 6: Cognitive Clusters -->
+          <div class="personality-card" style="margin-top: 30px;">
+            <h2 class="section-title">Cognitive Clusters</h2>
+            <p class="section-subtitle">AI semantic grouping and classification of your thoughts</p>
+            <div id="cognitive-clusters-container" class="personality-grid">
+              <p style="color:var(--text-tertiary); grid-column: 1 / -1; text-align: center; padding: 20px 0;">Loading clusters...</p>
+            </div>
+          </div>
+
+        </div>
+      </div>
+
+      <!-- ════════════════════════════════════════════════
+           MEMORY VAULT PAGE (accessible from profile menu)
+           ════════════════════════════════════════════════ -->
+      <div id="page-memory-vault" class="page">
+        <div class="page-container">
+          <div class="vault-header">
+            <h1 class="vault-header__title">Memory Vault</h1>
+            <p class="vault-header__subtitle">Your personal life archive. Milestones, breakthroughs, and moments that matter.</p>
+          </div>
+          <div class="vault-controls">
+            <div class="vault-tabs">
+              <button class="vault-tab active" data-view="gallery">Gallery</button>
+              <button class="vault-tab" data-view="timeline">Timeline</button>
+            </div>
+            <button id="vault-add-btn" class="vault-add-btn">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>
+              New Memory
+            </button>
+          </div>
+          
+          <div class="vault-search-container" style="margin-top: 15px; margin-bottom: 20px; display: flex; gap: 10px; width: 100%;">
+            <input type="text" id="vault-search-input" class="form-input" placeholder="Ask your Memory Vault: 'What was my sunrise breakthrough?' or 'When did I finish my project?'" style="flex: 1;" />
+            <button id="vault-search-btn" class="btn-save" style="width: auto; padding: 0 20px; white-space: nowrap;">Ask Vault</button>
+          </div>
+          
+          <div id="vault-search-result" class="ai-reflection-card hidden" style="margin-bottom: 25px; background: rgba(241, 143, 26, 0.04); border: 1px solid rgba(241, 143, 26, 0.2);">
+            <div class="ai-reflection__sparkle">✦</div>
+            <div class="ai-reflection__content">
+              <h2 class="ai-reflection__label" style="color: var(--primary-orange);">AI Synthesis</h2>
+              <p id="vault-search-result-text" class="ai-reflection__text" style="font-size: 1.05rem; line-height: 1.6;"></p>
+            </div>
+          </div>
+
+          <div id="vault-gallery" class="vault-gallery"></div>
+          <div id="vault-timeline" class="vault-timeline hidden"></div>
+        </div>
+      </div>
+
+      <!-- ════════════════════════════════════════════════
+           PROFILE PAGE
+           ════════════════════════════════════════════════ -->
+      <div id="page-profile" class="page">
+        <div class="page-container profile-page">
+
+          <div class="profile-page__header">
+            <div id="profile-avatar-large" class="profile-page__avatar">?</div>
+            <div class="profile-page__header-info">
+              <h1 id="profile-display-name" class="profile-page__name">User</h1>
+              <p id="profile-email" class="profile-page__email">user@gmail.com</p>
+            </div>
+          </div>
+
+          <div class="profile-page__section">
+            <div class="profile-page__section-title">Personal Information</div>
+
+            <div id="profile-info-view">
+              <div class="profile-info-row">
+                <span class="profile-info-row__label">Full Name</span>
+                <span id="profile-val-name" class="profile-info-row__value">—</span>
+              </div>
+              <div class="profile-info-row">
+                <span class="profile-info-row__label">Gender</span>
+                <span id="profile-val-gender" class="profile-info-row__value">—</span>
+              </div>
+              <div class="profile-info-row">
+                <span class="profile-info-row__label">Age</span>
+                <span id="profile-val-age" class="profile-info-row__value">—</span>
+              </div>
+              <div class="profile-info-row">
+                <span class="profile-info-row__label">Education</span>
+                <span id="profile-val-education" class="profile-info-row__value">—</span>
+              </div>
+              <div class="profile-info-row">
+                <span class="profile-info-row__label">Member Since</span>
+                <span id="profile-val-joined" class="profile-info-row__value">—</span>
+              </div>
+              <div class="profile-info-row">
+                <span class="profile-info-row__label">Spotify</span>
+                <span id="profile-val-spotify" class="profile-info-row__value">Not connected</span>
+              </div>
+              <button id="profile-edit-btn" class="profile-edit-btn">Edit Profile</button>
+            </div>
+
+            <div id="profile-info-edit" class="hidden">
+              <div class="form-group">
+                <label for="profile-edit-name">Full Name</label>
+                <input type="text" id="profile-edit-name" class="form-input" />
+              </div>
+              <div class="form-row">
+                <div class="form-group">
+                  <label for="profile-edit-gender">Gender</label>
+                  <select id="profile-edit-gender" class="form-input">
+                    <option value="male">Male</option>
+                    <option value="female">Female</option>
+                    <option value="non-binary">Non-binary</option>
+                    <option value="prefer-not">Prefer not to say</option>
+                  </select>
+                </div>
+                <div class="form-group">
+                  <label for="profile-edit-age">Age</label>
+                  <input type="number" id="profile-edit-age" class="form-input" min="13" max="120" />
+                </div>
+              </div>
+              <div class="form-group">
+                <label for="profile-edit-education">Education</label>
+                <select id="profile-edit-education" class="form-input">
+                  <option value="high-school">High School</option>
+                  <option value="bachelors">Bachelor's Degree</option>
+                  <option value="masters">Master's Degree</option>
+                  <option value="phd">PhD / Doctorate</option>
+                  <option value="self-taught">Self-taught</option>
+                  <option value="other">Other</option>
+                </select>
+              </div>
+              <div class="profile-edit-actions">
+                <button id="profile-cancel-btn" class="btn-cancel">Cancel</button>
+                <button id="profile-save-btn" class="btn-save">Save Changes</button>
+              </div>
+            </div>
+          </div>
+
+        </div>
+      </div>
+
+    </main>
+  </div>
+
+  <!-- ═══════════════════════════════════════════════════
+       MODALS
+       ═══════════════════════════════════════════════════ -->
+
+  <!-- Journal History Modal -->
+  <div id="modal-journal-history" class="modal-overlay">
+    <div class="modal">
+      <div class="modal__header">
+        <h3 class="modal__title">Journal History</h3>
+        <button class="modal__close"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg></button>
+      </div>
+      <div class="modal__body" id="journal-history-list"></div>
+    </div>
+  </div>
+
+  <!-- Song History Modal -->
+  <div id="modal-song-history" class="modal-overlay">
+    <div class="modal modal--wide">
+      <div class="modal__header">
+        <div>
+          <h3 class="modal__title">🎵 Song History</h3>
+          <p style="font-size:0.78rem;color:var(--text-tertiary);margin:2px 0 0">Your Spotify listening data</p>
+        </div>
+        <button class="modal__close"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg></button>
+      </div>
+      <div class="modal__body modal__body--no-pad" id="song-history-list"></div>
+    </div>
+  </div>
+
+  <!-- Analysis History Modal -->
+  <div id="modal-analysis-history" class="modal-overlay">
+    <div class="modal">
+      <div class="modal__header">
+        <h3 class="modal__title">Analysis History</h3>
+        <button class="modal__close"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg></button>
+      </div>
+      <div class="modal__body" id="analysis-history-list"></div>
+    </div>
+  </div>
+
+  <!-- Settings Modal -->
+  <div id="modal-settings" class="modal-overlay">
+    <div class="modal">
+      <div class="modal__header">
+        <h3 class="modal__title">Settings</h3>
+        <button class="modal__close"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg></button>
+      </div>
+      <div class="modal__body">
+        <div class="settings-section">
+          <div class="settings-section__title">Spotify Connection</div>
+          <div class="settings-row">
+            <div><div class="settings-row__label">Spotify Account</div><div id="settings-spotify-desc" class="settings-row__desc">Sync your listening history</div></div>
+            <label class="toggle-switch"><input type="checkbox" id="settings-spotify-toggle" /><span class="toggle-switch__slider"></span></label>
+          </div>
+        </div>
+        <div class="settings-section">
+          <div class="settings-section__title">Notifications</div>
+          <div class="settings-row">
+            <div><div class="settings-row__label">Daily Journal Reminder</div><div class="settings-row__desc">Get reminded to write each day</div></div>
+            <label class="toggle-switch"><input type="checkbox" checked /><span class="toggle-switch__slider"></span></label>
+          </div>
+          <div class="settings-row">
+            <div><div class="settings-row__label">Weekly Insights Report</div><div class="settings-row__desc">Receive AI analysis summary weekly</div></div>
+            <label class="toggle-switch"><input type="checkbox" checked /><span class="toggle-switch__slider"></span></label>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- New Memory Form Overlay -->
+  <div id="diary-form-overlay" class="diary-form-overlay">
+    <div class="diary-form-card">
+      <h3>✨ New Memory</h3>
+      <div class="form-group"><label for="diary-input-title">Title</label><input type="text" id="diary-input-title" class="form-input" placeholder="What happened?" /></div>
+      <div class="form-group"><label for="diary-input-text">Description</label><textarea id="diary-input-text" placeholder="Describe this memory..."></textarea></div>
+      <div class="form-group">
+        <label>Photo <span class="form-hint">(optional, max 500KB)</span></label>
+        <div class="photo-upload-area">
+          <div id="diary-photo-preview" class="photo-upload-preview"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><path d="m21 15-5-5L5 21"/></svg><span>Click to add a photo</span></div>
+          <input type="file" id="diary-input-photo" accept="image/*" class="photo-upload-input" />
+        </div>
+      </div>
+      <div class="form-group">
+        <label>Mood</label>
+        <div class="mood-tag-selector">
+          <button class="mood-tag-btn" data-mood="Joyful">😊 Joyful</button>
+          <button class="mood-tag-btn" data-mood="Proud">🏆 Proud</button>
+          <button class="mood-tag-btn" data-mood="Calm">🧘 Calm</button>
+          <button class="mood-tag-btn" data-mood="Motivated">🔥 Motivated</button>
+          <button class="mood-tag-btn" data-mood="Inspired">✨ Inspired</button>
+          <button class="mood-tag-btn" data-mood="Grateful">🙏 Grateful</button>
+          <button class="mood-tag-btn" data-mood="Reflective">💭 Reflective</button>
+          <button class="mood-tag-btn" data-mood="Focused">🎯 Focused</button>
+        </div>
+      </div>
+      <div class="diary-form-actions">
+        <button id="diary-cancel-btn" class="btn-cancel">Cancel</button>
+        <button id="diary-save-btn" class="btn-save">Save Memory</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Toast -->
+  <div id="toast" class="toast">
+    <span id="toast-icon" class="toast__icon"></span>
+    <span id="toast-message"></span>
+  </div>
+
+  <!-- ═══════════════════════════════════════════════════
+       SELF-REFLECTION FLOATING CHAT
+       ═══════════════════════════════════════════════════ -->
+
+  <!-- Floating Action Button -->
+  <button id="sr-fab" class="sr-fab" title="Ask LyricMind about yourself" aria-label="Open self-reflection chat">
+    <svg class="sr-fab__icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+      <path d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8v.5z"/>
+    </svg>
+    <svg class="sr-fab__icon-close" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round">
+      <line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/>
+    </svg>
+    <span class="sr-fab__pulse"></span>
+  </button>
+
+  <!-- Chat Panel -->
+  <div id="sr-panel" class="sr-panel">
+    <!-- Header -->
+    <div class="sr-panel__header">
+      <div class="sr-panel__header-info">
+        <div class="sr-panel__header-icon">🧠</div>
+        <div>
+          <div class="sr-panel__title">LyricMind AI</div>
+          <div class="sr-panel__subtitle">Ask about yourself.</div>
+        </div>
+      </div>
+      <button id="sr-close" class="sr-panel__close" aria-label="Close chat">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
+      </button>
+    </div>
+
+    <!-- Messages Area -->
+    <div id="sr-messages" class="sr-panel__messages">
+      <!-- Welcome message -->
+      <div class="sr-welcome">
+        <div class="sr-welcome__icon">✦</div>
+        <h3 class="sr-welcome__title">Self-Reflection</h3>
+        <p class="sr-welcome__text">I can help you understand your patterns, emotions, and growth by analyzing your journals, memories, and listening history.</p>
+      </div>
+
+      <!-- Suggestion chips -->
+      <div id="sr-suggestions" class="sr-suggestions">
+        <button class="sr-chip">Why am I feeling like this today?</button>
+        <button class="sr-chip">What makes me productive?</button>
+        <button class="sr-chip">What usually causes my stress?</button>
+        <button class="sr-chip">What habits are helping me grow?</button>
+        <button class="sr-chip">How have I changed recently?</button>
+      </div>
+    </div>
+
+    <!-- Input Area -->
+    <div class="sr-panel__input-area">
+      <input type="text" id="sr-input" class="sr-input" placeholder="Ask about yourself..." autocomplete="off" />
+      <button id="sr-send" class="sr-send" aria-label="Send message">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <line x1="22" y1="2" x2="11" y2="13"/><polygon points="22 2 15 22 11 13 2 9 22 2"/>
+        </svg>
+      </button>
+    </div>
+  </div>
+
+  <script type="module" src="/js/app.js"></script>
+</body>
+</html>

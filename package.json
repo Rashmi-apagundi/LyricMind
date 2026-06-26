@@ -1,0 +1,15 @@
+{
+  "name": "lyricmind-ai",
+  "version": "1.0.0",
+  "description": "LyricMind AI — Emotional Intelligence & Self-Awareness Platform",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "dev": "vite --open",
+    "build": "vite build",
+    "preview": "vite preview"
+  },
+  "devDependencies": {
+    "vite": "^6.3.5"
+  }
+}
